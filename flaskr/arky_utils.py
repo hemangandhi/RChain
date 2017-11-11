@@ -1,4 +1,5 @@
 from arky import api
+from arky import core
 
 api.use('rchain')
 
@@ -18,8 +19,13 @@ def get_threads(root):
 def make_user(password):
     """
     Returns an address for a user and their secret.
+    Suppose you have "rv = make_user("something")"
+    So the secret is probably rv[1]['signingKey']
+    and the address is definately rv[0].
     """
-    pass
+    private_info = core.getKeys(password)
+    addr = core.getAddress(private_info)
+    return addr, private_info
 
 def get_user_stats(user_address):
     """
