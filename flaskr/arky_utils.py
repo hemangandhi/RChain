@@ -1,7 +1,7 @@
 from arky import api
 from arky import core
 
-api.use("dark")
+api.use("rchain")
 
 def get_threads(root):
     """
@@ -42,3 +42,8 @@ def get_user_stats(user_address):
     else:
         return arky_res.account
 
+def put_post(post, passpharse):
+    tx = core.Transaction(vendorField=post, secret=passpharse)
+    api.sendTx(tx)
+
+put_post("derp", "rabbit")

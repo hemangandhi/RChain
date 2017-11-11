@@ -1,7 +1,6 @@
 #port 5000 by default
 import os
 import sqlite3
-#from arky import api
 import json
 import arky_utils
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
