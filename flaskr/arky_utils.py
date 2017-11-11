@@ -1,7 +1,7 @@
 from arky import api
 from arky import core
 
-api.use('rchain')
+api.use("dark")
 
 def get_threads(root):
     """
