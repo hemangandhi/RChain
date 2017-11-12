@@ -10,7 +10,7 @@ def post_to_HTML(post, wrapping = "<li>", kids_wrapping = "<ol>"):
     def close(wrapping):
         return wrapping[0] + '/' + wrapping[1:]
 
-    acc = ['content']
+    acc = post['content']
     acc += "<br/>\nThis post has " + str(post['votes']) + " votes"
     acc += ' <a onclick="upvote('+str(post['id'])+')" class="upvote" href="#" data-id="' + str(post['id']) + '">upvote</a>'
     acc += ' <a onclick="downvote('+str(post['id'])+')" class="downvote" href="#" data-id="' + str(post['id']) + '">downvote</a>'
@@ -26,7 +26,7 @@ def read_all():
     return """<!DOCTYPE html>
 <html>
     <head>
-    <script src="static/vote.js">
+    <script src="static/vote.js"></script>
         <title>RChain</title>
     </head>
     <body>""" + render_all_threads() + '\t</body>\n</html>'
