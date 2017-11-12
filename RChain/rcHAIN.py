@@ -6,7 +6,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 
 app = Flask(__name__)
 
-idx = arky_utils.num_threads()
+idx = int(arky_utils.num_threads())
 def next_id():
     global idx
     idx = idx + 1
@@ -52,6 +52,7 @@ def downvote(id, tok):
 
 @app.route('/reply/<id>/<content>/<tok>', methods=['POST'])
 def reply(id, content, tok):
+    id = int(id)
     m_id = next_id()
     p_id = id if id >= 0 else m_id
     post = {
