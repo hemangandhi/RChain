@@ -96,5 +96,3 @@ def get_user_stats(user_address):
 def put_post(post, passpharse):
     tx = core.Transaction(vendorField=post, secret=passpharse)
     api.sendTx(tx)
-
-print(all_threads())
