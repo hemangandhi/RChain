@@ -25,7 +25,7 @@ def read_all():
     return """<!DOCTYPE html>
 <html>
     <head>
-    <script src="vote.js">
+    <script src="static/vote.js">
         <title>RChain</title>
     </head>
     <body>""" + render_all_threads() + '\t</body>\n</html>'
