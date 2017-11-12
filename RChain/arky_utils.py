@@ -19,11 +19,16 @@ def all_threads():
             continue
         post = json.loads(post_transaction['vendorField'])
         post['kids'] = []
+        post['voters'] = dict()
         if len(seen) == 0:
             roots.append(post)
             seen[post['id']] = post
         elif post['id'] in seen:
-            seen[post['id']]['votes'] += post['votes']
+            if post_transaction['senderId'] not in seen[post['id']]['voters'] or\
+                    post['votes'] != seen[post['id']]['voters'][post_transaction['senderId']]:
+                seen[post['id']]['votes'] += post['votes']
+                seen[post['id']]['voters'][post_transaction['senderId']] = post['votes']
+                seen[post['id']]['voters'][post_transaction['senderId']] = post['votes']
         elif post['parent'] in seen:
             seen[post['parent']]['kids'].append(post)
             seen[post['id']] = post
@@ -94,6 +99,11 @@ def get_user_stats(user_address):
     else:
         return arky_res.account
 
+txs = []
 def put_post(post, passpharse):
+    global txs
     tx = core.Transaction(vendorField=post, secret=passpharse)
-    api.sendTx(tx)
+    txs.append(tx)
+    if len(txs) > 10:
+        api.broadcast(txs)
+        txs = []

@@ -1,11 +1,23 @@
-function upvote(hash){
-
-
+function upvote(id){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readState == 4 && this.status == 200){
+            window.location.reload();
+        }
+    }
+    xhr.open("POST", "/upvote/" + id + "/" + prompt("Enter your token!"), true);
+    xhr.send();
 }
 
-function downvote(hash){
-
-
+function downvote(id){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readState == 4 && this.status == 200){
+            window.location.reload();
+        }
+    }
+    xhr.open("POST", "/downvote/" + id + "/" + prompt("Enter your token!"), true);
+    xhr.send();
 }
 
 function openreply(hash){

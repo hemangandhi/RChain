@@ -31,9 +31,14 @@ def read_all():
     </head>
     <body><img id="logo" src="static/RChainLogo.png" height="150" alt="RChain"/>""" + render_all_threads() + '\t</body>\n</html>'
 
-@app.route('/upvote/<id>')
-def upvote(id):
-    #do
-    pass
+@app.route('/upvote/<id>/<tok>', methods=['POST'])
+def upvote(id, tok):
+    arky_utils.put_post('{"vote": 1, "id": ' + str(id) + '}', tok)
+    return "OK"
+
+@app.route('/downvote/<id>/<tok>', methods=['POST'])
+def downvote(id, tok):
+    arky_utils.put_post('{"vote": 1, "id": ' + str(id) + '}', tok)
+    return "OK"
 
 app.run()
