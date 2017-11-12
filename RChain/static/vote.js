@@ -1,5 +1,20 @@
-function upvote(hash){}
+function upvote(hash){
 
-function downvote(hash){}
 
-function reply(hash){}
+}
+
+function downvote(hash){
+
+
+}
+
+function openreply(hash){
+	document.getElementById("textin") = '';
+	document.getElementById("reploy"+str(hash)).onclick = "reply(" + hash + ")";
+	document.getElementById("spun").innerHTML = '<input type="text" id="textin">' + document.getElementById("spun").innerHTML;
+}
+
+function reply(hash){
+
+
+}
