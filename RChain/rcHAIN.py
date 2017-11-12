@@ -29,7 +29,7 @@ def read_all():
     <script src="static/vote.js"></script>
         <title>RChain</title>
     </head>
-    <body>""" + render_all_threads() + '\t</body>\n</html>'
+    <body><img id="logo" src="static/RChainLogo.png" height="150" alt="RChain"/>""" + render_all_threads() + '\t</body>\n</html>'
 
 @app.route('/upvote/<id>')
 def upvote(id):
