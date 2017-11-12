@@ -23,9 +23,10 @@ def all_threads():
             roots.append(post)
             seen[post['id']] = post
         elif post['id'] in seen:
-            seen[post['id']]['votes'] = post['votes']
+            seen[post['id']]['votes'] += post['votes']
         elif post['parent'] in seen:
             seen[post['parent']]['kids'].append(post)
+            seen[post['id']] = post
         else:
             seen[post['id']] = post
             roots.append(post)

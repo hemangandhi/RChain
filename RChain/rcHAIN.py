@@ -31,4 +31,9 @@ def read_all():
     </head>
     <body>""" + render_all_threads() + '\t</body>\n</html>'
 
+@app.route('/upvote/<id>')
+def upvote(id):
+    #do
+    pass
+
 app.run()
