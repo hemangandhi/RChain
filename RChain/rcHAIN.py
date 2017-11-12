@@ -12,8 +12,8 @@ def post_to_HTML(post, wrapping = "<li>", kids_wrapping = "<ol>"):
 
     acc = ['content']
     acc += "<br/>\nThis post has " + str(post['votes']) + " votes"
-    acc += ' <a onclick="upvote('+ +')" class="upvote" href="#" data-id="' + str(post['id']) + '">upvote</a>'
-    acc += ' <a onclick="downvote()" class="downvote" href="#" data-id="' + str(post['id']) + '">downvote</a>'
+    acc += ' <a onclick="upvote('+post['id']+')" class="upvote" href="#" data-id="' + str(post['id']) + '">upvote</a>'
+    acc += ' <a onclick="downvote('+post['id']+')" class="downvote" href="#" data-id="' + str(post['id']) + '">downvote</a>'
     acc += kids_wrapping + '\n'+ '\n'.join(post_to_HTML(k, wrapping, kids_wrapping) for k in post['kids']) + close(kids_wrapping)
     return wrapping + acc + close(wrapping)
 
