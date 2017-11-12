@@ -11,14 +11,14 @@ def post_to_HTML(post, wrapping = "<li>", kids_wrapping = "<ol>"):
         return wrapping[0] + '/' + wrapping[1:]
 
     acc = post['content']
-    acc += "<br/>This post has " + str(post['votes']) + " votes"
+    acc += "<br/>\nThis post has " + str(post['votes']) + " votes"
     acc += ' <a class="upvote" href="#" data-id="' + str(post['id']) + '">upvote</a>'
     acc += ' <a class="downvote" href="#" data-id="' + str(post['id']) + '">downvote</a>'
-    acc += kids_wrapping + ''.join(post_to_HTML(k, wrapping, kids_wrapping) for k in post['kids']) + close(kids_wrapping)
+    acc += kids_wrapping + '\n'+ '\n'.join(post_to_HTML(k, wrapping, kids_wrapping) for k in post['kids']) + close(kids_wrapping)
     return wrapping + acc + close(wrapping)
 
 def render_all_threads():
-    return '<ol>' + ''.join(post_to_HTML(p) for p in arky_utils.all_threads()) + '</ol>'
+    return '<ol>' + ''.join(post_to_HTML(p) for p in arky_utils.all_threads()) + '</ol>\n'
 
 @app.route('/')
 def read_all():
