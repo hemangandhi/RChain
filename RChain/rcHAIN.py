@@ -10,10 +10,10 @@ def post_to_HTML(post, wrapping = "<li>", kids_wrapping = "<ol>"):
     def close(wrapping):
         return wrapping[0] + '/' + wrapping[1:]
 
-    acc = post['content']
+    acc = ['content']
     acc += "<br/>\nThis post has " + str(post['votes']) + " votes"
-    acc += ' <a class="upvote" href="#" data-id="' + str(post['id']) + '">upvote</a>'
-    acc += ' <a class="downvote" href="#" data-id="' + str(post['id']) + '">downvote</a>'
+    acc += ' <a onclick="upvote('+ +')" class="upvote" href="#" data-id="' + str(post['id']) + '">upvote</a>'
+    acc += ' <a onclick="downvote()" class="downvote" href="#" data-id="' + str(post['id']) + '">downvote</a>'
     acc += kids_wrapping + '\n'+ '\n'.join(post_to_HTML(k, wrapping, kids_wrapping) for k in post['kids']) + close(kids_wrapping)
     return wrapping + acc + close(wrapping)
 
@@ -22,7 +22,12 @@ def render_all_threads():
 
 @app.route('/')
 def read_all():
-    return """<!DOCTYPE html><html>
-    <head><title>RChain</title></head><body>""" + render_all_threads() + "</body></html>"
+    return """<!DOCTYPE html>
+<html>
+    <head>
+    <script src="vote.js">
+        <title>RChain</title>
+    </head>
+    <body>""" + render_all_threads() + '\t</body>\n</html>'
 
 app.run()
