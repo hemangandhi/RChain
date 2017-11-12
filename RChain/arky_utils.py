@@ -4,6 +4,9 @@ import json
 
 api.use("rchain")
 
+def num_threads():
+    return api.get("/api/transactions").count
+
 def all_threads():
     """
     Returns every thread in the ledger.
@@ -14,7 +17,7 @@ def all_threads():
     if not trans.success:
         print(trans)
         return None
-    for post_transaction in trans.transactions:
+    for post_transaction in reversed(trans.transactions):
         if 'vendorField' not in post_transaction:
             continue
         post = json.loads(post_transaction['vendorField'])
@@ -28,7 +31,6 @@ def all_threads():
                     post['votes'] != seen[post['id']]['voters'][post_transaction['senderId']]:
                 seen[post['id']]['votes'] += post['votes']
                 seen[post['id']]['voters'][post_transaction['senderId']] = post['votes']
-                seen[post['id']]['voters'][post_transaction['senderId']] = post['votes']
         elif post['parent'] in seen:
             seen[post['parent']]['kids'].append(post)
             seen[post['id']] = post
@@ -36,7 +38,6 @@ def all_threads():
             seen[post['id']] = post
             roots.append(post)
     return roots
-
 
 def get_threads(root=None):
     """
@@ -103,7 +104,8 @@ txs = []
 def put_post(post, passpharse):
     global txs
     tx = core.Transaction(vendorField=post, secret=passpharse)
-    txs.append(tx)
-    if len(txs) > 10:
-        api.broadcast(txs)
-        txs = []
+    api.broadcast(tx)
+    # txs.append(tx)
+    # if len(txs) > 10:
+    #     api.broadcast(txs)
+    #     txs = []
