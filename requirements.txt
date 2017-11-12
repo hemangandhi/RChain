@@ -1,2 +1,2 @@
-arky==0.4.1
+git+git://github.com/hemangandhi/arky.git@master
 Flask==0.12
