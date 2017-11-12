@@ -61,7 +61,7 @@ def get_threads(root=None):
             post['kids'] = []
         elif post is None: continue
         elif post['id'] in seen_ids:
-            seen_ids[post['id']]['votes'] = post['votes']
+            seen_ids[post['id']]['votes'] += post['votes']
         elif post['parent'] in seen_ids:
             post['kids'] = []
             seen_ids[post['parent']]['kids'].append(post)
